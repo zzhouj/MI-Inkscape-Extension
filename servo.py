@@ -3082,7 +3082,8 @@ class laser_gcode(inkex.Effect):
             translate = [0,0]
 
         # doc height in pixels (38 mm == 134.64566px)
-        doc_height = inkex.unittouu(self.document.getroot().get('height'))
+        #doc_height = inkex.unittouu(self.document.getroot().get('height'))
+        doc_height = self.unittouu(self.document.getroot().xpath('@height', namespaces=inkex.NSS)[0])
 
         if self.document.getroot().get('height') == "100%" :
             doc_height = 1052.3622047
@@ -3092,7 +3093,8 @@ class laser_gcode(inkex.Effect):
             
         if self.options.unit == "G21 (All units in mm)" : 
             points = [[0.,0.,0.],[100.,0.,0.],[0.,100.,0.]]
-            orientation_scale = 3.5433070660
+            #orientation_scale = 3.5433070660      ORIGINAL LINE 
+            orientation_scale = 1.0
             print_("orientation_scale < 0 ===> switching to mm units=%0.10f"%orientation_scale )
         elif self.options.unit == "G20 (All units in inches)" :
             points = [[0.,0.,0.],[5.,0.,0.],[0.,5.,0.]]
